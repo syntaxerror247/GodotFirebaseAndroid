@@ -7,6 +7,14 @@ var export_plugin : AndroidExportPlugin
 const BUILD_GRADLE_PLUGIN_LINE := "id 'com.google.gms.google-services'"
 const SETTINGS_GRADLE_PLUGIN_LINE := "id 'com.google.gms.google-services' version '4.4.2' apply false"
 
+const DEPENDENCIES := [
+	"com.google.firebase:firebase-auth:23.2.0",
+	"com.google.android.gms:play-services-auth:21.3.0",
+	"com.google.firebase:firebase-firestore:25.1.4",
+	"com.google.firebase:firebase-database:21.0.0",
+	"com.google.firebase:firebase-storage:21.0.1"
+]
+
 func _enter_tree():
 	export_plugin = AndroidExportPlugin.new()
 	add_export_plugin(export_plugin)
@@ -89,9 +97,9 @@ class AndroidExportPlugin extends EditorExportPlugin:
 
 	func _get_android_dependencies(platform, debug):
 		if debug:
-			return PackedStringArray(["com.google.firebase:firebase-auth:23.2.0", "com.google.android.gms:play-services-auth:21.3.0", "com.google.firebase:firebase-firestore:25.1.4", "com.google.firebase:firebase-storage:21.0.1", "com.google.firebase:firebase-database:21.0.0"])
+			return PackedStringArray(DEPENDENCIES)
 		else:
-			return PackedStringArray(["com.google.firebase:firebase-auth:23.2.0", "com.google.android.gms:play-services-auth:21.3.0", "com.google.firebase:firebase-firestore:25.1.4", "com.google.firebase:firebase-storage:21.0.1", "com.google.firebase:firebase-database:21.0.0"])
+			return PackedStringArray(DEPENDENCIES)
 
 	func _get_name():
 		return _plugin_name
