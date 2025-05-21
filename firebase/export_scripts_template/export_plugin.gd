@@ -1,20 +1,80 @@
 @tool
-extends EditorPlugin
+class_name FirebaseEditorPlugin extends EditorPlugin
 
 var export_plugin : AndroidExportPlugin
+
+# Firebase plugin lines to inject into Gradle files
+const BUILD_GRADLE_PLUGIN_LINE := "id 'com.google.gms.google-services'"
+const SETTINGS_GRADLE_PLUGIN_LINE := "id 'com.google.gms.google-services' version '4.4.2' apply false"
 
 func _enter_tree():
 	export_plugin = AndroidExportPlugin.new()
 	add_export_plugin(export_plugin)
 
-
 func _exit_tree():
 	remove_export_plugin(export_plugin)
 	export_plugin = null
 
+func _enable_plugin() -> void:
+	add_autoload_singleton("Firebase", "res://addons/GodotFirebaseAndroid/Firebase.gd")
+
+func _disable_plugin() -> void:
+	remove_autoload_singleton("Firebase")
+	_cleanup_gradle_files()
+
+static func _cleanup_gradle_files() -> void:
+	_clean_line_from_file("res://android/build/build.gradle", BUILD_GRADLE_PLUGIN_LINE)
+	_clean_line_from_file("res://android/build/settings.gradle", SETTINGS_GRADLE_PLUGIN_LINE)
+
+static func _clean_line_from_file(file_path: String, line_to_remove: String) -> void:
+	if FileAccess.file_exists(file_path):
+		var text := FileAccess.open(file_path, FileAccess.READ).get_as_text()
+		text = text.replace(line_to_remove, "")
+		var file := FileAccess.open(file_path, FileAccess.WRITE)
+		file.store_string(text)
+		file.close()
+
 
 class AndroidExportPlugin extends EditorExportPlugin:
 	var _plugin_name = "GodotFirebaseAndroid"
+	
+	func _export_begin(features: PackedStringArray, is_debug: bool, path: String, flags: int) -> void:
+		if not features.has("android"):
+			return
+		
+		if (not get_option("gradle_build/use_gradle_build")) or (not FileAccess.file_exists("res://android/build/google-services.json")):
+			FirebaseEditorPlugin._cleanup_gradle_files()
+			return
+		
+		# Modify build.gradle
+		_insert_line_if_missing("res://android/build/build.gradle", "id 'org.jetbrains.kotlin.android'", BUILD_GRADLE_PLUGIN_LINE)
+		# Modify settings.gradle
+		_insert_line_if_missing("res://android/build/settings.gradle", "id 'org.jetbrains.kotlin.android' version versions.kotlinVersion", SETTINGS_GRADLE_PLUGIN_LINE)
+
+	func _insert_line_if_missing(file_path: String, after_line: String, insert_line: String) -> void:
+		var text := FileAccess.open(file_path, FileAccess.READ).get_as_text()
+		if text.contains(insert_line):
+			return
+		
+		var lines := text.split("\n")
+		var result := PackedStringArray()
+		var inserted := false
+
+		for line in lines:
+			result.append(line)
+			if not inserted and line.strip_edges() == after_line.strip_edges():
+				var indent := ""
+				for c in line:
+					if c == " " or c == "\t":
+						indent += c
+					else:
+						break
+				result.append(indent + insert_line)
+				inserted = true
+
+		var file := FileAccess.open(file_path, FileAccess.WRITE)
+		file.store_string("\n".join(result))
+		file.close()
 
 	func _supports_platform(platform):
 		if platform is EditorExportPlatformAndroid:
