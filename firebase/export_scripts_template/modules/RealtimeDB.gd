@@ -4,7 +4,7 @@ signal write_task_completed(result: Dictionary)
 signal get_task_completed(result: Dictionary)
 signal update_task_completed(result: Dictionary)
 signal delete_task_completed(result: Dictionary)
-signal db_value_changed(document_path: String, data: Dictionary)
+signal db_value_changed(path: String, data: Dictionary)
 
 var _plugin_singleton: Object
 

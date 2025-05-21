@@ -4,7 +4,7 @@ signal write_task_completed(result: Dictionary)
 signal get_task_completed(result: Dictionary)
 signal update_task_completed(result: Dictionary)
 signal delete_task_completed(result: Dictionary)
-signal document_changed(doc_path: String, data: Dictionary)
+signal document_changed(document_path: String, data: Dictionary)
 
 var _plugin_singleton: Object
 
@@ -45,6 +45,6 @@ func listen_to_document(documentPath: String) -> void:
 	if _plugin_singleton:
 		_plugin_singleton.firestoreListenToDocument(documentPath)
 
-func firestoreStopListeningToDocument(documentPath: String) -> void:
+func stop_listening_to_document(documentPath: String) -> void:
 	if _plugin_singleton:
 		_plugin_singleton.firestoreStopListeningToDocument(documentPath)
