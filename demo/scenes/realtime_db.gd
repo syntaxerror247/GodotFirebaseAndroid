@@ -3,6 +3,11 @@ extends Control
 @onready var path = $MarginContainer/VBoxContainer/HBoxContainer/path
 @onready var pair_container = $ManageDataPanel/VBoxContainer/ScrollContainer/key_value_pair_container
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		get_tree().change_scene_to_packed(load("res://main.tscn"))
+
+
 func _ready() -> void:
 	Firebase.realtimeDB.write_task_completed.connect(print_output.bind("write_task_completed"))
 	Firebase.realtimeDB.get_task_completed.connect(print_output.bind("get_task_completed"))

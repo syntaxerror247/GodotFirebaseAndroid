@@ -1,5 +1,5 @@
 @tool
-class_name FirebaseEditorPlugin extends EditorPlugin
+extends EditorPlugin
 
 var export_plugin : AndroidExportPlugin
 
@@ -30,11 +30,11 @@ func _disable_plugin() -> void:
 	remove_autoload_singleton("Firebase")
 	_cleanup_gradle_files()
 
-static func _cleanup_gradle_files() -> void:
+func _cleanup_gradle_files() -> void:
 	_clean_line_from_file("res://android/build/build.gradle", BUILD_GRADLE_PLUGIN_LINE)
 	_clean_line_from_file("res://android/build/settings.gradle", SETTINGS_GRADLE_PLUGIN_LINE)
 
-static func _clean_line_from_file(file_path: String, line_to_remove: String) -> void:
+func _clean_line_from_file(file_path: String, line_to_remove: String) -> void:
 	if FileAccess.file_exists(file_path):
 		var text := FileAccess.open(file_path, FileAccess.READ).get_as_text()
 		text = text.replace(line_to_remove, "")
@@ -51,12 +51,12 @@ class AndroidExportPlugin extends EditorExportPlugin:
 			return
 		
 		if (not get_option("gradle_build/use_gradle_build")) or (not FileAccess.file_exists("res://android/build/google-services.json")):
-			FirebaseEditorPlugin._cleanup_gradle_files()
+			_clean_line_from_file("res://android/build/build.gradle", BUILD_GRADLE_PLUGIN_LINE)
+			_clean_line_from_file("res://android/build/settings.gradle", SETTINGS_GRADLE_PLUGIN_LINE)
 			return
 		
-		# Modify build.gradle
+		# Modify build.gradle and settings.gradle
 		_insert_line_if_missing("res://android/build/build.gradle", "id 'org.jetbrains.kotlin.android'", BUILD_GRADLE_PLUGIN_LINE)
-		# Modify settings.gradle
 		_insert_line_if_missing("res://android/build/settings.gradle", "id 'org.jetbrains.kotlin.android' version versions.kotlinVersion", SETTINGS_GRADLE_PLUGIN_LINE)
 
 	func _insert_line_if_missing(file_path: String, after_line: String, insert_line: String) -> void:
@@ -67,7 +67,7 @@ class AndroidExportPlugin extends EditorExportPlugin:
 		var lines := text.split("\n")
 		var result := PackedStringArray()
 		var inserted := false
-
+		
 		for line in lines:
 			result.append(line)
 			if not inserted and line.strip_edges() == after_line.strip_edges():
@@ -79,10 +79,18 @@ class AndroidExportPlugin extends EditorExportPlugin:
 						break
 				result.append(indent + insert_line)
 				inserted = true
-
+		
 		var file := FileAccess.open(file_path, FileAccess.WRITE)
 		file.store_string("\n".join(result))
 		file.close()
+
+	func _clean_line_from_file(file_path: String, line_to_remove: String) -> void:
+		if FileAccess.file_exists(file_path):
+			var text := FileAccess.open(file_path, FileAccess.READ).get_as_text()
+			text = text.replace(line_to_remove, "")
+			var file := FileAccess.open(file_path, FileAccess.WRITE)
+			file.store_string(text)
+			file.close()
 
 	func _supports_platform(platform):
 		if platform is EditorExportPlatformAndroid:
