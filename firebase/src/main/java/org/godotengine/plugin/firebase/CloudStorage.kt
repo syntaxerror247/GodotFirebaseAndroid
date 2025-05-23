@@ -76,6 +76,29 @@ class CloudStorage(private val plugin: FirebasePlugin) {
 			}
 	}
 
+	fun getMetadata(path: String) {
+		val ref = storageRef.child(path)
+
+		ref.metadata
+			.addOnSuccessListener { metadata ->
+				val metadataDict = Dictionary()
+				metadataDict["content_type"] = metadata.contentType
+				metadataDict["size_bytes"] = metadata.sizeBytes
+				metadataDict["updated_time"] = metadata.updatedTimeMillis
+				metadataDict["creation_time"] = metadata.creationTimeMillis
+				metadataDict["name"] = metadata.name
+				metadataDict["path"] = metadata.path
+				metadataDict["bucket"] = metadata.bucket
+
+				Log.d(TAG, "Metadata retrieved for $path")
+				plugin.emitGodotSignal("storage_download_task_completed", createResultDict(true, path, data = metadataDict))
+			}
+			.addOnFailureListener { e ->
+				Log.e(TAG, "Failed to get metadata for $path", e)
+				plugin.emitGodotSignal("storage_download_task_completed", createResultDict(false, path, e.message))
+			}
+	}
+
 	fun deleteFile(path: String) {
 		val ref = storageRef.child(path)
 

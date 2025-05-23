@@ -115,6 +115,9 @@ class FirebasePlugin(godot: Godot) : GodotPlugin(godot) {
     fun storageDownloadFile(path: String, destinationPath: String) = storage.downloadFile(path, destinationPath)
 
     @UsedByGodot
+    fun storageGetMetadata(path: String) = storage.getMetadata(path)
+
+    @UsedByGodot
     fun storageDeleteFile(path: String) = storage.deleteFile(path)
 
     @UsedByGodot

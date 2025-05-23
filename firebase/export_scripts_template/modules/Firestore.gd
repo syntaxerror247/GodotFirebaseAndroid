@@ -17,9 +17,9 @@ func _connect_signals():
 	_plugin_singleton.connect("firestore_delete_task_completed", delete_task_completed.emit)
 	_plugin_singleton.connect("firestore_document_changed", document_changed.emit)
 
-func add_document(collection: String, documentId: String) -> void:
+func add_document(collection: String, data: Dictionary) -> void:
 	if _plugin_singleton:
-		_plugin_singleton.firestoreAddDocument(collection, documentId)
+		_plugin_singleton.firestoreAddDocument(collection, data)
 
 func set_document(collection: String, documentId: String, data: Dictionary, merge: bool = false) -> void:
 	if _plugin_singleton:
