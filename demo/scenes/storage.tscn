@@ -1,0 +1,154 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpxjrj5th1sdt"]
+
+[ext_resource type="Script" uid="uid://bqo5rpk2iaqo3" path="res://scenes/storage.gd" id="1_ueev3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nnb4j"]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.14902, 0.117647, 0.854902, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ykan5"]
+bg_color = Color(0.180392, 0.596078, 0.572549, 0.666667)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_taf4q"]
+bg_color = Color(0.14902, 0.117647, 0.854902, 0.564706)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Storage" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ueev3")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 36
+alignment = 1
+
+[node name="get_image_path" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "select an Image to upload"
+
+[node name="LineEdit2" type="LineEdit" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+placeholder_text = "download file path (local storage)"
+
+[node name="LineEdit3" type="LineEdit" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+placeholder_text = "file path (Cloud Storage)"
+
+[node name="upload_file" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_nnb4j")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ykan5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_taf4q")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ykan5")
+text = "Upload File"
+
+[node name="download_file" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_nnb4j")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ykan5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_taf4q")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ykan5")
+text = "Download File"
+
+[node name="get_metadata" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_nnb4j")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ykan5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_taf4q")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ykan5")
+text = "Get Metadata"
+
+[node name="delete_file" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_nnb4j")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ykan5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_taf4q")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ykan5")
+text = "Delete File"
+
+[node name="list_files" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_nnb4j")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ykan5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_taf4q")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ykan5")
+text = "List Files"
+
+[node name="OutputPanel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 32
+
+[node name="FileDialog" type="FileDialog" parent="."]
+title = "Open a File"
+position = Vector2i(0, 36)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("image/*")
+use_native_dialog = true
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/get_image_path" to="." method="_on_get_image_path_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/upload_file" to="." method="_on_upload_file_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/download_file" to="." method="_on_download_file_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/get_metadata" to="." method="_on_get_metadata_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/delete_file" to="." method="_on_delete_file_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/list_files" to="." method="_on_list_files_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

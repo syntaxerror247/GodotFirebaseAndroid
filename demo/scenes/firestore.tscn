@@ -1,0 +1,318 @@
+[gd_scene load_steps=8 format=3 uid="uid://by3lq5rrca21w"]
+
+[ext_resource type="Script" uid="uid://b6ce0u3c1yf13" path="res://scenes/firestore.gd" id="1_m3na1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dm0k"]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.14902, 0.117647, 0.854902, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u4mew"]
+bg_color = Color(0.205117, 0.205117, 0.205117, 0.666667)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xm2m"]
+bg_color = Color(0.14902, 0.117647, 0.854902, 0.564706)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e3ux7"]
+bg_color = Color(0.205117, 0.205117, 0.205117, 0.666667)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ig7tw"]
+bg_color = Color(0.180392, 0.596078, 0.572549, 0.666667)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pqa68"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.2484, 0.2484, 0.2484, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Firestore" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m3na1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 36
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="collection" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+placeholder_text = "collection"
+alignment = 1
+
+[node name="docID" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+placeholder_text = "doc ID"
+alignment = 1
+
+[node name="manage_data" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_u4mew")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/normal = SubResource("StyleBoxFlat_e3ux7")
+text = "Manage Data"
+
+[node name="add_document" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+text = "Add Document"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="set_document" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(120, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+text = "Set Document"
+
+[node name="merge" type="CheckButton" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+text = "Merge"
+alignment = 1
+
+[node name="get_document" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+text = "Get Document"
+
+[node name="get_documents_in_collection" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+text = "Get Documents in Collection"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 26
+
+[node name="update_document" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(120, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+text = "Update Document"
+
+[node name="delete_document" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(120, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+text = "Delete Document"
+
+[node name="listen_to_document" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+text = "Listen To Document"
+
+[node name="stop_listening_to_document" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 70)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+text = "Stop Listening To Document"
+
+[node name="OutputPanel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 32
+
+[node name="ManageDataPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -332.5
+offset_top = -498.5
+offset_right = 332.5
+offset_bottom = 498.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pqa68")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ManageDataPanel"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ManageDataPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="key_value_pair_container" type="VBoxContainer" parent="ManageDataPanel/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="sample_pair" type="HBoxContainer" parent="ManageDataPanel/VBoxContainer/ScrollContainer/key_value_pair_container"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="key" type="LineEdit" parent="ManageDataPanel/VBoxContainer/ScrollContainer/key_value_pair_container/sample_pair"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+placeholder_text = "key"
+alignment = 1
+
+[node name="value" type="LineEdit" parent="ManageDataPanel/VBoxContainer/ScrollContainer/key_value_pair_container/sample_pair"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+placeholder_text = "values"
+alignment = 1
+
+[node name="CheckBox" type="CheckButton" parent="ManageDataPanel/VBoxContainer/ScrollContainer/key_value_pair_container/sample_pair"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Numeric"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ManageDataPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="close" type="Button" parent="ManageDataPanel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+text = "Close"
+
+[node name="add_pair" type="Button" parent="ManageDataPanel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 70)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+text = "New Pair"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/manage_data" to="." method="_on_manage_data_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/add_document" to="." method="_on_add_document_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/set_document" to="." method="_on_set_document_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/get_document" to="." method="_on_get_document_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/get_documents_in_collection" to="." method="_on_get_documents_in_collection_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer3/update_document" to="." method="_on_update_document_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer3/delete_document" to="." method="_on_delete_document_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/listen_to_document" to="." method="_on_listen_to_document_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/stop_listening_to_document" to="." method="_on_stop_listening_to_document_pressed"]
+[connection signal="pressed" from="ManageDataPanel/VBoxContainer/HBoxContainer/close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="ManageDataPanel/VBoxContainer/HBoxContainer/add_pair" to="." method="_on_add_pair_pressed"]
