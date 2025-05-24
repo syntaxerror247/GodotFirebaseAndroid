@@ -1,3 +1,9 @@
+---
+layout: default
+title: Firebase Android
+nav_order: 1
+---
+
 # GodotFirebaseAndroid
 
 **GodotFirebaseAndroid** is an Android plugin for the Godot Engine that integrates Firebase services in Godot Android games and apps.
@@ -26,14 +32,6 @@
 3. **Enable Gradle Build**
    - Open **Project > Export**
    - Enable `gradle_build/use_gradle_build` in Android preset.
-
-## Documentation
-
-- [Authentication](authentication.md)
-- [Cloud Firestore](firestore.md)
-- [Realtime Database](realtime_database.md)
-- [Cloud Storage](storage.md)
-- [Cloud Messaging](messaging.md)
 
 ## License
 

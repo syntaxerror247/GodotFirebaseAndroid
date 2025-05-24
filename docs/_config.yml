@@ -1,0 +1,32 @@
+title: Godot Firebase Android
+description: Documentation for the GodotFirebaseAndroid plugin
+theme: just-the-docs
+color_scheme: dark
+
+url: https://syntaxerror247.github.io
+
+aux_links:
+  Plugin Repository: https://github.com/syntaxerror247/GodotFirebaseAndroid
+
+callouts_level: quiet # or loud
+callouts:
+  highlight:
+    color: yellow
+  important:
+    title: Important
+    color: blue
+  new:
+    title: New
+    color: green
+  note:
+    title: Note
+    color: purple
+  warning:
+    title: Warning
+    color: red
+
+# Footer content
+back_to_top: true
+back_to_top_text: "Back to top"
+
+footer_content: 'Copyright &copy; 2025 Anish Mishra. Distributed by an <a href="https://github.com/syntaxerror247/GodotFirebaseAndroid/blob/main/LICENSE">MIT license.</a>'
