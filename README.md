@@ -1,6 +1,7 @@
 # GodotFirebaseAndroid
 
-Firebase plugin for Android export in Godot Engine.
+**GodotFirebaseAndroid** is an Android plugin for the Godot Engine that integrates Firebase services in Godot Android games and apps.
+It supports Godot 4.2+
 
 ## Features
 
@@ -12,11 +13,11 @@ Firebase plugin for Android export in Godot Engine.
 
 ---
 
-## Quick Start
+## 🚀 Quick Start
 
-**Step 1: Install the Plugin**
+### 1. Install the Plugin
 
-- Download the latest release from the [Releases](https://github.com/your-repo/releases) page.
+- Download the latest release from the [Releases](https://github.com/syntaxerror247/GodotFirebaseAndroid/releases) page.
 
 - Unzip and copy the plugin to your project’s `addons` folder:
 
@@ -24,17 +25,17 @@ Firebase plugin for Android export in Godot Engine.
   your_project/addons/GodotFirebaseAndroid/
   ```
 
-- In Godot, go to **Project > Project Settings > Plugins**, and enable **GodotFirebaseAndroid**.
+- In Godot, go to:
+  **Project > Project Settings > Plugins**, and enable **GodotFirebaseAndroid**.
 
 ---
 
-**Step 2: Add Firebase to Your Project**
+### 2. Add Firebase to Your Project
 
-- Open [Firebase Console](https://console.firebase.google.com)
+- Visit [Firebase Console](https://console.firebase.google.com)
 - Create a Firebase project and register your Android app.
-- Enable the required services (e.g., Authentication, Firestore).
-- Download the `google-services.json` file.
-- Place it in:
+- Enable required services (e.g., Authentication, Firestore).
+- Download the `google-services.json` file and place it in:
 
   ```
   android/build/google-services.json
@@ -42,18 +43,14 @@ Firebase plugin for Android export in Godot Engine.
 
 ---
 
-**Step 3: Enable Gradle Build for Android Export**
+### 3. Enable Gradle Build for Android Export
 
-- In Godot:
-  **Project > Export > Android > gradle/use_gradle_build**: ✅
+In Godot, go to:
+
+**Project > Export > Android > gradle/use\_gradle\_build** and enable it ✅
 
 ---
 
-## Build Notes
+## 📚 Documentation
 
-This plugin automatically modifies `build.gradle` and `settings.gradle` at export time to include the necessary Firebase dependencies.
-
-Make sure:
-
-- Gradle build is enabled before exporting.
-- `google-services.json` exists in `android/build/` before export.
+Full documentation is available at: https://syntaxerror247.github.io/GodotFirebaseAndroid
