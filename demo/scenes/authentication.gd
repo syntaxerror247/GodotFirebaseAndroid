@@ -14,6 +14,9 @@ func _ready() -> void:
 	Firebase.auth.auth_success.connect(print_output.bind("auth_success"))
 	Firebase.auth.auth_failure.connect(print_output.bind("auth_failure"))
 	Firebase.auth.sign_out_success.connect(print_output.bind("sign_out_success"))
+	Firebase.auth.email_verification_sent.connect(print_output.bind("email_verification_sent"))
+	Firebase.auth.password_reset_sent.connect(print_output.bind("password_reset_sent"))
+	Firebase.auth.user_deleted.connect(print_output.bind("user_deleted"))
 
 func print_output(arg, context: String):
 	output_panel.text += context + ": " +str(arg) + "\n"
@@ -49,3 +52,11 @@ func _on_sign_out_pressed() -> void:
 
 func _on_delete_user_pressed() -> void:
 	Firebase.auth.delete_current_user()
+
+
+func _on_email_verification_pressed() -> void:
+	Firebase.auth.send_email_verification()
+
+
+func _on_password_reset_pressed() -> void:
+	Firebase.auth.send_password_reset_email(email.text)

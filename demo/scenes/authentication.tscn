@@ -105,6 +105,26 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
 text = "Sign In With Email Password"
 
+[node name="email_verification" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+text = "Send Email Verification"
+
+[node name="password_reset" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+text = "Send Password Reset Email"
+
 [node name="google_sign_in" type="Button" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
@@ -163,6 +183,8 @@ theme_override_font_sizes/normal_font_size = 32
 [connection signal="pressed" from="MarginContainer/VBoxContainer/anonymous_sign_in" to="." method="_on_anonymous_sign_in_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/email_sign_up" to="." method="_on_email_sign_up_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/email_sign_in" to="." method="_on_email_sign_in_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/email_verification" to="." method="_on_email_verification_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/password_reset" to="." method="_on_password_reset_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/google_sign_in" to="." method="_on_google_sign_in_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/get_user_data" to="." method="_on_get_user_data_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/is_signed_in" to="." method="_on_is_signed_in_pressed"]
