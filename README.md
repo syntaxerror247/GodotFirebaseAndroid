@@ -21,12 +21,11 @@ It supports Godot 4.2+
 
 - Unzip and copy the plugin to your project’s `addons` folder:
 
-  ```
-  your_project/addons/GodotFirebaseAndroid/
-  ```
+	```
+	your_project/addons/GodotFirebaseAndroid/
+	```
 
-- In Godot, go to:
-  **Project > Project Settings > Plugins**, and enable **GodotFirebaseAndroid**.
+- In Godot, go to: **Project > Project Settings > Plugins**, and enable **GodotFirebaseAndroid**.
 
 ---
 
@@ -37,17 +36,15 @@ It supports Godot 4.2+
 - Enable required services (e.g., Authentication, Firestore).
 - Download the `google-services.json` file and place it in:
 
-  ```
-  android/build/google-services.json
-  ```
+	```
+	android/build/google-services.json
+	```
 
 ---
 
 ### 3. Enable Gradle Build for Android Export
 
-In Godot, go to:
-
-**Project > Export > Android > gradle/use\_gradle\_build** and enable it ✅
+In Godot, go to: **Project > Export > Android > gradle/use\_gradle\_build** and enable it ✅
 
 ---
 
