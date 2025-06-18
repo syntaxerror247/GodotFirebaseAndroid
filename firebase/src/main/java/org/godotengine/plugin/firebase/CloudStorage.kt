@@ -68,11 +68,26 @@ class CloudStorage(private val plugin: FirebasePlugin) {
 		ref.getFile(localFile)
 			.addOnSuccessListener {
 				Log.d(TAG, "File downloaded successfully to $destinationPath")
-				plugin.emitGodotSignal("storage_download_task_completed", createResultDict(false, destinationPath))
+				plugin.emitGodotSignal("storage_download_task_completed", createResultDict(true, destinationPath))
 			}
 			.addOnFailureListener { e ->
 				Log.e(TAG, "Download failed: $path")
 				plugin.emitGodotSignal("storage_download_task_completed", createResultDict(false, destinationPath, e.message))
+			}
+	}
+
+	fun getDownloadUrl(path: String) {
+		val ref = storageRef.child(path)
+		ref.downloadUrl
+			.addOnSuccessListener { uri ->
+				val result = Dictionary()
+				result["url"] = uri.toString()
+				Log.d(TAG, "Download URL retrieved for $path")
+				plugin.emitGodotSignal("storage_download_task_completed", createResultDict(true, path, data = result))
+			}
+			.addOnFailureListener { e ->
+				Log.e(TAG, "Failed to get download URL for $path", e)
+				plugin.emitGodotSignal("storage_download_task_completed", createResultDict(false, path, e.message))
 			}
 	}
 

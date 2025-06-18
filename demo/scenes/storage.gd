@@ -48,3 +48,7 @@ func _on_list_files_pressed() -> void:
 func _on_file_dialog_file_selected(path: String) -> void:
 	print(path)
 	selected_image_path = path
+
+
+func _on_download_url_pressed() -> void:
+	Firebase.storage.get_download_url(cloud_storage_path.text)

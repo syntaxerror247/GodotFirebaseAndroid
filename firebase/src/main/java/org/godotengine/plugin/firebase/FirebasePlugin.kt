@@ -112,6 +112,9 @@ class FirebasePlugin(godot: Godot) : GodotPlugin(godot) {
 	fun storageUploadFile(path: String, localFilePath: String) = storage.uploadFile(path, localFilePath)
 
 	@UsedByGodot
+	fun storageGetDownloadUrl(path: String) = storage.getDownloadUrl(path)
+
+	@UsedByGodot
 	fun storageDownloadFile(path: String, destinationPath: String) = storage.downloadFile(path, destinationPath)
 
 	@UsedByGodot

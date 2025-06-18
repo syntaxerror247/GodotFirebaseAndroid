@@ -23,6 +23,10 @@ func download_file(path: String, destinationPath: String) -> void:
 	if _plugin_singleton:
 		_plugin_singleton.storageDownloadFile(path, destinationPath)
 
+func get_download_url(path: String) -> void:
+	if _plugin_singleton:
+		_plugin_singleton.storageGetDownloadUrl(path)
+
 func get_metadata(path: String) -> void:
 	if _plugin_singleton:
 		_plugin_singleton.storageGetMetadata(path)

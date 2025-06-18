@@ -38,6 +38,19 @@ Firebase.storage.upload_file("uploads/image.png", "user://images/image.png")
 ---
 
 {: .text-green-100 }
+### get_download_url(path: String)
+
+Get the download URL for a file in Firebase Storage.
+
+**Emits:** `download_task_completed`
+
+```gdscript
+Firebase.storage.get_download_url("uploads/image.png")
+```
+
+---
+
+{: .text-green-100 }
 ### download_file(path: String, destinationPath: String)
 
 Downloads a file from Firebase Storage to the specified local path.
