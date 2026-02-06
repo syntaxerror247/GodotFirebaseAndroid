@@ -5,7 +5,7 @@ It supports Godot 4.2+
 
 ## Features
 
-- [x] Firebase Authentication (Email/Password, Google Sign-In)
+- [x] Firebase Authentication (Anonymous, Email/Password, Google Sign-In)
 - [x] Cloud Firestore
 - [x] Realtime Database
 - [x] Cloud Storage
