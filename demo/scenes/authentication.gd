@@ -38,6 +38,10 @@ func _on_google_sign_in_pressed() -> void:
 	Firebase.auth.sign_in_with_google()
 
 
+func _on_link_anonymous_with_google_pressed() -> void:
+	Firebase.auth.link_anonymous_with_google()
+
+
 func _on_get_user_data_pressed() -> void:
 	print_output(Firebase.auth.get_current_user_data(), "Current User Data")
 

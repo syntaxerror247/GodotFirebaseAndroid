@@ -65,6 +65,9 @@ class FirebasePlugin(godot: Godot) : GodotPlugin(godot) {
 	fun signInWithGoogle() = auth.signInWithGoogle()
 
 	@UsedByGodot
+	fun linkAnonymousWithGoogle() = auth.linkAnonymousWithGoogle()
+
+	@UsedByGodot
 	fun getCurrentUser() = auth.getCurrentUser()
 
 	@UsedByGodot

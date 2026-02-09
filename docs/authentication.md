@@ -105,11 +105,30 @@ Firebase.auth.sign_in_with_google()
 ---
 
 {: .text-green-100 }
+### link_anonymous_with_google()
+
+Links the currently signed-in anonymous user to a Google account, converting it to a permanent account. The anonymous user's UID and data are preserved. Must be called while an anonymous user is signed in.
+
+**Emits:** `auth_success` or `auth_failure`.
+
+```gdscript
+Firebase.auth.link_anonymous_with_google()
+```
+
+---
+
+{: .text-green-100 }
 ### get_current_user_data() -> Dictionary
 
-If no user is signed in, returns an dictionary with error.
+If no user is signed in, returns a dictionary with error.
 
-**Returns** a dictionary containing the currently signed-in user's data.
+**Returns** a dictionary containing the currently signed-in user's data:
+- `name` — Display name
+- `email` — Email address
+- `photoUrl` — Profile photo URL
+- `emailVerified` — Whether the email is verified
+- `isAnonymous` — Whether the user is anonymous
+- `uid` — User ID
 
 ```gdscript
 Firebase.auth.get_current_user_data()

@@ -43,6 +43,10 @@ func sign_in_with_google() -> void:
 	if _plugin_singleton:
 		_plugin_singleton.signInWithGoogle()
 
+func link_anonymous_with_google() -> void:
+	if _plugin_singleton:
+		_plugin_singleton.linkAnonymousWithGoogle()
+
 func get_current_user_data() -> Dictionary:
 	var user_data: Dictionary
 	if _plugin_singleton:

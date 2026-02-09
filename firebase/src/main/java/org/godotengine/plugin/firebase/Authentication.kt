@@ -24,6 +24,7 @@ class Authentication(private val plugin: FirebasePlugin) {
 	private lateinit var activity: android.app.Activity
 	private val auth: FirebaseAuth = Firebase.auth
 	private lateinit var googleSignInClient: GoogleSignInClient
+	private var isLinkingAnonymous = false
 
 	fun authSignals(): MutableSet<SignalInfo> {
 		val signals: MutableSet<SignalInfo> = mutableSetOf()
@@ -61,8 +62,14 @@ class Authentication(private val plugin: FirebasePlugin) {
 			try {
 				val account = task.getResult(ApiException::class.java)!!
 				Log.d(TAG, "authWithGoogle:" + account.id)
-				authWithGoogle(account.idToken!!)
+				if (isLinkingAnonymous) {
+					isLinkingAnonymous = false
+					linkWithGoogle(account.idToken!!)
+				} else {
+					authWithGoogle(account.idToken!!)
+				}
 			} catch (e: ApiException) {
+				isLinkingAnonymous = false
 				Log.w(TAG, "Google sign in failed", e)
 				plugin.emitGodotSignal("auth_failure", e.message ?: "Unknown error")
 			}
@@ -146,6 +153,17 @@ class Authentication(private val plugin: FirebasePlugin) {
 		}
 	}
 
+	fun linkAnonymousWithGoogle() {
+		val currentUser = auth.currentUser
+		if (currentUser == null || !currentUser.isAnonymous) {
+			Log.e(TAG, "No anonymous user signed in.")
+			plugin.emitGodotSignal("auth_failure", "No anonymous user signed in.")
+			return
+		}
+		isLinkingAnonymous = true
+		signInWithGoogle()
+	}
+
 	private fun authWithGoogle(idToken: String) {
 		val credential = GoogleAuthProvider.getCredential(idToken, null)
 		auth.signInWithCredential(credential)
@@ -160,6 +178,20 @@ class Authentication(private val plugin: FirebasePlugin) {
 			}
 	}
 
+	private fun linkWithGoogle(idToken: String) {
+		val credential = GoogleAuthProvider.getCredential(idToken, null)
+		auth.currentUser!!.linkWithCredential(credential)
+			.addOnSuccessListener { authResult ->
+				val uid = authResult.user?.uid
+				Log.d(TAG, "linkWithCredential:success -> $uid")
+				plugin.emitGodotSignal("auth_success", getCurrentUser())
+			}
+			.addOnFailureListener { e ->
+				Log.w(TAG, "linkWithCredential:failure", e)
+				plugin.emitGodotSignal("auth_failure", e.message ?: "Unknown error")
+			}
+	}
+
 	fun getCurrentUser(): Dictionary {
 		val user = auth.currentUser
 		val userData = Dictionary()
@@ -168,6 +200,7 @@ class Authentication(private val plugin: FirebasePlugin) {
 			userData["email"] = user.email
 			userData["photoUrl"] = user.photoUrl?.toString()
 			userData["emailVerified"] = user.isEmailVerified
+			userData["isAnonymous"] = user.isAnonymous
 			userData["uid"] = user.uid
 		} else {
 			userData["error"] = "No user signed in"
