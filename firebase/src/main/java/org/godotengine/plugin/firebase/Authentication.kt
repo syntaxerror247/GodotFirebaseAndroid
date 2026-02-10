@@ -161,9 +161,20 @@ class Authentication(private val plugin: FirebasePlugin) {
 
 	fun linkAnonymousWithGoogle() {
 		val currentUser = auth.currentUser
-		if (currentUser == null || !currentUser.isAnonymous) {
-			Log.e(TAG, "No anonymous user signed in.")
-			plugin.emitGodotSignal("auth_failure", "No anonymous user signed in.")
+		if (currentUser == null) {
+			Log.e(TAG, "No user signed in.")
+			plugin.emitGodotSignal("auth_failure", "No user signed in.")
+			return
+		}
+		if (!currentUser.isAnonymous) {
+			val hasGoogle = currentUser.providerData.any { it.providerId == GoogleAuthProvider.PROVIDER_ID }
+			if (hasGoogle) {
+				Log.d(TAG, "User is already linked with Google (uid=${currentUser.uid}). Skipping link.")
+				plugin.emitGodotSignal("auth_success", getCurrentUser())
+			} else {
+				Log.d(TAG, "User is not anonymous but not linked with Google. Skipping anonymous link.")
+				plugin.emitGodotSignal("auth_failure", "Current user is not anonymous. Use signInWithGoogle() instead.")
+			}
 			return
 		}
 		isLinkingAnonymous = true
