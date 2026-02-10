@@ -77,6 +77,12 @@ class Authentication(private val plugin: FirebasePlugin) {
 	}
 
 	fun signInAnonymously() {
+		val currentUser = auth.currentUser
+		if (currentUser != null) {
+			Log.d(TAG, "User already signed in (uid=${currentUser.uid}, isAnonymous=${currentUser.isAnonymous}). Skipping anonymous sign-in.")
+			plugin.emitGodotSignal("auth_success", getCurrentUser())
+			return
+		}
 		auth.signInAnonymously()
 			.addOnSuccessListener {
 				val uid = it.user?.uid
