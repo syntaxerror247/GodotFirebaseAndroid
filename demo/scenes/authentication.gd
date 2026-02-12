@@ -13,6 +13,8 @@ func _notification(what: int) -> void:
 func _ready() -> void:
 	Firebase.auth.auth_success.connect(print_output.bind("auth_success"))
 	Firebase.auth.auth_failure.connect(print_output.bind("auth_failure"))
+	Firebase.auth.link_with_google_success.connect(print_output.bind("link_with_google_success"))
+	Firebase.auth.link_with_google_failure.connect(print_output.bind("link_with_google_failure"))
 	Firebase.auth.sign_out_success.connect(print_output.bind("sign_out_success"))
 	Firebase.auth.email_verification_sent.connect(print_output.bind("email_verification_sent"))
 	Firebase.auth.password_reset_sent.connect(print_output.bind("password_reset_sent"))

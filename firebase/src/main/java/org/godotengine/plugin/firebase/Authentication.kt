@@ -30,6 +30,8 @@ class Authentication(private val plugin: FirebasePlugin) {
 		val signals: MutableSet<SignalInfo> = mutableSetOf()
 		signals.add(SignalInfo("auth_success", Dictionary::class.java))
 		signals.add(SignalInfo("auth_failure", String::class.java))
+		signals.add(SignalInfo("link_with_google_success", Dictionary::class.java))
+		signals.add(SignalInfo("link_with_google_failure", String::class.java))
 		signals.add(SignalInfo("sign_out_success", Boolean::class.javaObjectType))
 		signals.add(SignalInfo("password_reset_sent", Boolean::class.javaObjectType))
 		signals.add(SignalInfo("email_verification_sent", Boolean::class.javaObjectType))
@@ -69,9 +71,14 @@ class Authentication(private val plugin: FirebasePlugin) {
 					authWithGoogle(account.idToken!!)
 				}
 			} catch (e: ApiException) {
+				val wasLinking = isLinkingAnonymous
 				isLinkingAnonymous = false
 				Log.w(TAG, "Google sign in failed", e)
-				plugin.emitGodotSignal("auth_failure", e.message ?: "Unknown error")
+				if (wasLinking) {
+					plugin.emitGodotSignal("link_with_google_failure", e.message ?: "Unknown error")
+				} else {
+					plugin.emitGodotSignal("auth_failure", e.message ?: "Unknown error")
+				}
 			}
 		}
 	}
@@ -80,7 +87,7 @@ class Authentication(private val plugin: FirebasePlugin) {
 		val currentUser = auth.currentUser
 		if (currentUser != null) {
 			Log.d(TAG, "User already signed in (uid=${currentUser.uid}, isAnonymous=${currentUser.isAnonymous}). Skipping anonymous sign-in.")
-			plugin.emitGodotSignal("auth_success", getCurrentUser())
+			plugin.emitGodotSignal("auth_failure", "User is already signed in.")
 			return
 		}
 		auth.signInAnonymously()
@@ -163,20 +170,15 @@ class Authentication(private val plugin: FirebasePlugin) {
 		val currentUser = auth.currentUser
 		if (currentUser == null) {
 			Log.e(TAG, "No user signed in.")
-			plugin.emitGodotSignal("auth_failure", "No user signed in.")
+			plugin.emitGodotSignal("link_with_google_failure", "No user signed in.")
 			return
 		}
 		if (!currentUser.isAnonymous) {
-			val hasGoogle = currentUser.providerData.any { it.providerId == GoogleAuthProvider.PROVIDER_ID }
-			if (hasGoogle) {
-				Log.d(TAG, "User is already linked with Google (uid=${currentUser.uid}). Skipping link.")
-				plugin.emitGodotSignal("auth_success", getCurrentUser())
-			} else {
-				Log.d(TAG, "User is not anonymous but not linked with Google. Skipping anonymous link.")
-				plugin.emitGodotSignal("auth_failure", "Current user is not anonymous. Use signInWithGoogle() instead.")
-			}
+			Log.d(TAG, "Current user is not anonymous (uid=${currentUser.uid}). Cannot link.")
+			plugin.emitGodotSignal("link_with_google_failure", "Current user is not anonymous.")
 			return
 		}
+		Log.d(TAG, "Linking anonymous user (uid=${currentUser.uid}) with Google.")
 		isLinkingAnonymous = true
 		signInWithGoogle()
 	}
@@ -196,16 +198,22 @@ class Authentication(private val plugin: FirebasePlugin) {
 	}
 
 	private fun linkWithGoogle(idToken: String) {
+		val currentUser = auth.currentUser
+		if (currentUser == null) {
+			Log.e(TAG, "No user signed in during linkWithGoogle.")
+			plugin.emitGodotSignal("link_with_google_failure", "No user signed in.")
+			return
+		}
 		val credential = GoogleAuthProvider.getCredential(idToken, null)
-		auth.currentUser!!.linkWithCredential(credential)
+		currentUser.linkWithCredential(credential)
 			.addOnSuccessListener { authResult ->
 				val uid = authResult.user?.uid
 				Log.d(TAG, "linkWithCredential:success -> $uid")
-				plugin.emitGodotSignal("auth_success", getCurrentUser())
+				plugin.emitGodotSignal("link_with_google_success", getCurrentUser())
 			}
 			.addOnFailureListener { e ->
 				Log.w(TAG, "linkWithCredential:failure", e)
-				plugin.emitGodotSignal("auth_failure", e.message ?: "Unknown error")
+				plugin.emitGodotSignal("link_with_google_failure", e.message ?: "Unknown error")
 			}
 	}
 

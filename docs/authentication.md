@@ -16,6 +16,12 @@ The Firebase Authentication module in **GodotFirebaseAndroid** supports anonymou
 - `auth_failure(error_message: String)`
   Emitted when an authentication operation fails.
 
+- `link_with_google_success(current_user_data: Dictionary)`
+  Emitted when an anonymous user is successfully linked to a Google account.
+
+- `link_with_google_failure(error_message: String)`
+  Emitted when linking an anonymous user to a Google account fails.
+
 - `sign_out_success(success: bool)`
   Emitted after a sign-out operation. `true` indicates success.
 
@@ -109,7 +115,7 @@ Firebase.auth.sign_in_with_google()
 
 Links the currently signed-in anonymous user to a Google account, converting it to a permanent account. The anonymous user's UID and data are preserved. Must be called while an anonymous user is signed in.
 
-**Emits:** `auth_success` or `auth_failure`.
+**Emits:** `link_with_google_success` or `link_with_google_failure`.
 
 ```gdscript
 Firebase.auth.link_anonymous_with_google()

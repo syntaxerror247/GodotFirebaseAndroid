@@ -2,6 +2,8 @@ extends Node
 
 signal auth_success(current_user_data: Dictionary)
 signal auth_failure(error_message: String)
+signal link_with_google_success(current_user_data: Dictionary)
+signal link_with_google_failure(error_message: String)
 signal sign_out_success(success: bool)
 signal password_reset_sent(success: bool)
 signal email_verification_sent(success: bool)
@@ -14,6 +16,8 @@ func _connect_signals():
 		return
 	_plugin_singleton.connect("auth_success", auth_success.emit)
 	_plugin_singleton.connect("auth_failure", auth_failure.emit)
+	_plugin_singleton.connect("link_with_google_success", link_with_google_success.emit)
+	_plugin_singleton.connect("link_with_google_failure", link_with_google_failure.emit)
 	_plugin_singleton.connect("sign_out_success", sign_out_success.emit)
 	_plugin_singleton.connect("password_reset_sent", password_reset_sent.emit)
 	_plugin_singleton.connect("email_verification_sent", email_verification_sent.emit)
