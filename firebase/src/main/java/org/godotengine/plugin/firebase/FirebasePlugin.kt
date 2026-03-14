@@ -102,6 +102,9 @@ class FirebasePlugin(godot: Godot) : GodotPlugin(godot) {
 	fun firestoreGetDocumentsInCollection(collection: String) = firestore.getDocumentsInCollection(collection)
 
 	@UsedByGodot
+	fun firestoreQueryDocuments(collection: String, filters: Array<Any?>, orderBy: String, orderDescending: Boolean, limitCount: Int) = firestore.queryDocuments(collection, filters, orderBy, orderDescending, limitCount)
+
+	@UsedByGodot
 	fun firestoreListenToDocument(documentPath: String) = firestore.listenToDocument(documentPath)
 
 	@UsedByGodot

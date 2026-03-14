@@ -4,6 +4,7 @@ import android.util.Log
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.firestore
 import org.godotengine.godot.Dictionary
@@ -24,6 +25,7 @@ class Firestore(private val plugin: FirebasePlugin) {
 		signals.add(SignalInfo("firestore_update_task_completed", Dictionary::class.java))
 		signals.add(SignalInfo("firestore_delete_task_completed", Dictionary::class.java))
 		signals.add(SignalInfo("firestore_document_changed", String::class.java, Dictionary::class.java))
+		signals.add(SignalInfo("firestore_query_task_completed", Dictionary::class.java))
 		return signals
 	}
 
@@ -153,6 +155,96 @@ class Firestore(private val plugin: FirebasePlugin) {
 		Log.d(TAG, "Stopped listening to document $documentPath")
 	}
 
+
+	fun queryDocuments(
+		collection: String,
+		filters: Array<Any?>,
+		orderBy: String,
+		orderDescending: Boolean,
+		limitCount: Int
+	) {
+		var query: Query = firestore.collection(collection)
+
+		for (item in filters) {
+			if (item is Dictionary) {
+				val field = item["field"] as? String ?: continue
+				val op = item["op"] as? String ?: continue
+				val value = item["value"] ?: continue
+
+				query = when (op) {
+					"==" -> query.whereEqualTo(field, value)
+					"!=" -> query.whereNotEqualTo(field, value)
+					"<" -> query.whereLessThan(field, value)
+					"<=" -> query.whereLessThanOrEqualTo(field, value)
+					">" -> query.whereGreaterThan(field, value)
+					">=" -> query.whereGreaterThanOrEqualTo(field, value)
+					"array_contains" -> query.whereArrayContains(field, value)
+					"in" -> {
+						val list = when (value) {
+							is Array<*> -> value.toList()
+							is List<*> -> value
+							else -> listOf(value)
+						}
+						query.whereIn(field, list)
+					}
+					"not_in" -> {
+						val list = when (value) {
+							is Array<*> -> value.toList()
+							is List<*> -> value
+							else -> listOf(value)
+						}
+						query.whereNotIn(field, list)
+					}
+					"array_contains_any" -> {
+						val list = when (value) {
+							is Array<*> -> value.toList()
+							is List<*> -> value
+							else -> listOf(value)
+						}
+						query.whereArrayContainsAny(field, list)
+					}
+					else -> {
+						Log.w(TAG, "Unknown filter operator: $op")
+						query
+					}
+				}
+			}
+		}
+
+		if (orderBy.isNotEmpty()) {
+			query = query.orderBy(
+				orderBy,
+				if (orderDescending) Query.Direction.DESCENDING else Query.Direction.ASCENDING
+			)
+		}
+
+		if (limitCount > 0) {
+			query = query.limit(limitCount.toLong())
+		}
+
+		query.get()
+			.addOnSuccessListener { querySnapshot ->
+				val documents = mutableListOf<Dictionary>()
+				for (doc in querySnapshot.documents) {
+					val docDict = Dictionary()
+					docDict["docID"] = doc.id
+					docDict["data"] = snapshotToDictionary(doc)
+					documents.add(docDict)
+				}
+				val result = Dictionary()
+				result["status"] = true
+				result["documents"] = documents.toTypedArray()
+				Log.d(TAG, "Query completed successfully, ${documents.size} documents found")
+				plugin.emitGodotSignal("firestore_query_task_completed", result)
+			}
+			.addOnFailureListener { e ->
+				Log.e(TAG, "Error querying documents:", e)
+				val result = Dictionary()
+				result["status"] = false
+				result["error"] = e.message ?: "Unknown error"
+				plugin.emitGodotSignal("firestore_query_task_completed", result)
+			}
+	}
 
 	private fun snapshotToDictionary(snapshot: DocumentSnapshot): Dictionary {
 		val dict = Dictionary()
