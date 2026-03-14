@@ -1,18 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dppun5r2ki736"]
+[gd_scene format=3 uid="uid://dppun5r2ki736"]
 
 [ext_resource type="Script" uid="uid://b56wdetifixsv" path="res://main.gd" id="1_ig7tw"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xm2m"]
-draw_center = false
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.14902, 0.117647, 0.854902, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
 bg_color = Color(0.180392, 0.596078, 0.572549, 0.666667)
@@ -28,7 +16,19 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[node name="Main" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xm2m"]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.14902, 0.117647, 0.854902, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Main" type="Control" unique_id=418889083]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,7 +37,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ig7tw")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1850932597]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,7 +46,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.133333, 0.133333, 0.133333, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=189691385]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -58,49 +58,49 @@ theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 60
 theme_override_constants/margin_bottom = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1062512011]
 layout_mode = 2
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="Auth" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Auth" type="Button" parent="MarginContainer/VBoxContainer" unique_id=537895669]
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
-theme_override_styles/focus = SubResource("StyleBoxFlat_0xm2m")
-theme_override_styles/hover = SubResource("StyleBoxFlat_h2yge")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_1bvp3")
 theme_override_styles/normal = SubResource("StyleBoxFlat_h2yge")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1bvp3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_h2yge")
+theme_override_styles/focus = SubResource("StyleBoxFlat_0xm2m")
 text = "Authentication"
 
-[node name="Firestore" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Firestore" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1461008105]
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
-theme_override_styles/focus = SubResource("StyleBoxFlat_0xm2m")
-theme_override_styles/hover = SubResource("StyleBoxFlat_h2yge")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_1bvp3")
 theme_override_styles/normal = SubResource("StyleBoxFlat_h2yge")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1bvp3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_h2yge")
+theme_override_styles/focus = SubResource("StyleBoxFlat_0xm2m")
 text = "Firestore"
 
-[node name="RealtimeDB" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="RealtimeDB" type="Button" parent="MarginContainer/VBoxContainer" unique_id=401983515]
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
-theme_override_styles/focus = SubResource("StyleBoxFlat_0xm2m")
-theme_override_styles/hover = SubResource("StyleBoxFlat_h2yge")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_1bvp3")
 theme_override_styles/normal = SubResource("StyleBoxFlat_h2yge")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1bvp3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_h2yge")
+theme_override_styles/focus = SubResource("StyleBoxFlat_0xm2m")
 text = "Realtime Database"
 
-[node name="Storage" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Storage" type="Button" parent="MarginContainer/VBoxContainer" unique_id=570714099]
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
-theme_override_styles/focus = SubResource("StyleBoxFlat_0xm2m")
-theme_override_styles/hover = SubResource("StyleBoxFlat_h2yge")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_1bvp3")
 theme_override_styles/normal = SubResource("StyleBoxFlat_h2yge")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1bvp3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_h2yge")
+theme_override_styles/focus = SubResource("StyleBoxFlat_0xm2m")
 text = "Storage"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Auth" to="." method="_on_auth_pressed"]

@@ -1,19 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cpxjrj5th1sdt"]
+[gd_scene format=3 uid="uid://cpxjrj5th1sdt"]
 
 [ext_resource type="Script" uid="uid://bqo5rpk2iaqo3" path="res://scenes/storage.gd" id="1_ueev3"]
-[ext_resource type="Script" path="res://scenes/scroll_container.gd" id="2_scroll"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nnb4j"]
-draw_center = false
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.14902, 0.117647, 0.854902, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
+[ext_resource type="Script" uid="uid://c1lwfy11opayr" path="res://scenes/scroll_container.gd" id="2_scroll"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ykan5"]
 bg_color = Color(0.180392, 0.596078, 0.572549, 0.666667)
@@ -29,7 +17,19 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[node name="Storage" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nnb4j"]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.14902, 0.117647, 0.854902, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Storage" type="Control" unique_id=822135332]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,7 +38,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ueev3")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=940358115]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,7 +47,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.133333, 0.133333, 0.133333, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=167049553]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -59,117 +59,116 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1796174638]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" unique_id=615970092]
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 script = ExtResource("2_scroll")
 
-[node name="ButtonContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="ButtonContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer" unique_id=1508038207]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 20
 
-[node name="get_image_path" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer"]
+[node name="get_image_path" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=2115693194]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "select an Image to upload"
 
-[node name="LineEdit2" type="LineEdit" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer"]
+[node name="LineEdit2" type="LineEdit" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=1465489189]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 placeholder_text = "download file path (local storage)"
 
-[node name="LineEdit3" type="LineEdit" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer"]
+[node name="LineEdit3" type="LineEdit" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=1951687850]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 placeholder_text = "file path (Cloud Storage)"
 
-[node name="upload_file" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer"]
+[node name="upload_file" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=900130634]
 custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_nnb4j")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ykan5")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_taf4q")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ykan5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_taf4q")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ykan5")
+theme_override_styles/focus = SubResource("StyleBoxFlat_nnb4j")
 text = "Upload File"
 
-[node name="download_url" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer"]
+[node name="download_url" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=1787837820]
 custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_nnb4j")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ykan5")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_taf4q")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ykan5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_taf4q")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ykan5")
+theme_override_styles/focus = SubResource("StyleBoxFlat_nnb4j")
 text = "Get Download URL"
 
-[node name="download_file" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer"]
+[node name="download_file" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=1152021673]
 custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_nnb4j")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ykan5")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_taf4q")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ykan5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_taf4q")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ykan5")
+theme_override_styles/focus = SubResource("StyleBoxFlat_nnb4j")
 text = "Download File"
 
-[node name="get_metadata" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer"]
+[node name="get_metadata" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=1488147538]
 custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_nnb4j")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ykan5")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_taf4q")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ykan5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_taf4q")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ykan5")
+theme_override_styles/focus = SubResource("StyleBoxFlat_nnb4j")
 text = "Get Metadata"
 
-[node name="delete_file" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer"]
+[node name="delete_file" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=971912616]
 custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_nnb4j")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ykan5")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_taf4q")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ykan5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_taf4q")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ykan5")
+theme_override_styles/focus = SubResource("StyleBoxFlat_nnb4j")
 text = "Delete File"
 
-[node name="list_files" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer"]
+[node name="list_files" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=1218832507]
 custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_nnb4j")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ykan5")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_taf4q")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ykan5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_taf4q")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ykan5")
+theme_override_styles/focus = SubResource("StyleBoxFlat_nnb4j")
 text = "List Files"
 
-[node name="OutputPanel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+[node name="OutputPanel" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=1757809382]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
-size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 24
 scroll_following = true
 
-[node name="clear_output" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="clear_output" type="Button" parent="MarginContainer/VBoxContainer" unique_id=143818203]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-theme_override_styles/focus = SubResource("StyleBoxFlat_nnb4j")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ykan5")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_taf4q")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ykan5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_taf4q")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ykan5")
+theme_override_styles/focus = SubResource("StyleBoxFlat_nnb4j")
 text = "Clear Output"
 
-[node name="FileDialog" type="FileDialog" parent="."]
+[node name="FileDialog" type="FileDialog" parent="." unique_id=164122850]
 title = "Open a File"
 position = Vector2i(0, 36)
 ok_button_text = "Open"

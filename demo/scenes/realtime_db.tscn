@@ -1,21 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://c55qaxgt7rib8"]
+[gd_scene format=3 uid="uid://c55qaxgt7rib8"]
 
 [ext_resource type="Script" uid="uid://d2e4rd8p0lrkq" path="res://scenes/realtime_db.gd" id="1_t2rp6"]
-[ext_resource type="Script" path="res://scenes/scroll_container.gd" id="2_scroll"]
+[ext_resource type="Script" uid="uid://c1lwfy11opayr" path="res://scenes/scroll_container.gd" id="2_scroll"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ykmf"]
-draw_center = false
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.14902, 0.117647, 0.854902, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3kwyk"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hfmmi"]
 bg_color = Color(0.205117, 0.205117, 0.205117, 0.666667)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
@@ -29,14 +17,14 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hfmmi"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3kwyk"]
 bg_color = Color(0.205117, 0.205117, 0.205117, 0.666667)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dm0k"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ykmf"]
 draw_center = false
 border_width_left = 3
 border_width_top = 3
@@ -62,24 +50,24 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bky7l"]
-content_margin_left = 20.0
-content_margin_top = 20.0
-content_margin_right = 20.0
-content_margin_bottom = 20.0
-bg_color = Color(0.2484, 0.2484, 0.2484, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06hu1"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dm0k"]
 draw_center = false
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
 border_color = Color(0.14902, 0.117647, 0.854902, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bky7l"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.2484, 0.2484, 0.2484, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
@@ -99,7 +87,19 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[node name="RealtimeDatabase" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06hu1"]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.14902, 0.117647, 0.854902, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="RealtimeDatabase" type="Control" unique_id=499339871]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -108,7 +108,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_t2rp6")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=729099514]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -117,7 +117,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.133333, 0.133333, 0.133333, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1737132860]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -129,121 +129,120 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1602028102]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" unique_id=948446788]
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 script = ExtResource("2_scroll")
 
-[node name="ButtonContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="ButtonContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer" unique_id=334481448]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=1412249608]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="path" type="LineEdit" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer/HBoxContainer"]
+[node name="path" type="LineEdit" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer/HBoxContainer" unique_id=907271452]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
 placeholder_text = "path"
 alignment = 1
 
-[node name="manage_data" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer"]
+[node name="manage_data" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=2085366332]
 custom_minimum_size = Vector2(120, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_1ykmf")
-theme_override_styles/hover = SubResource("StyleBoxFlat_3kwyk")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_iw5n2")
 theme_override_styles/normal = SubResource("StyleBoxFlat_hfmmi")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_iw5n2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3kwyk")
+theme_override_styles/focus = SubResource("StyleBoxFlat_1ykmf")
 text = "Manage Data"
 
-[node name="set_value" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer"]
+[node name="set_value" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=1435841510]
 custom_minimum_size = Vector2(120, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
 text = "Set Value"
 
-[node name="get_value" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer"]
+[node name="get_value" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=2129767826]
 custom_minimum_size = Vector2(120, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
 text = "Get Value"
 
-[node name="update_value" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer"]
+[node name="update_value" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=1089191624]
 custom_minimum_size = Vector2(120, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
 text = "Update Value"
 
-[node name="delete_value" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer"]
+[node name="delete_value" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=929275813]
 custom_minimum_size = Vector2(120, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
 text = "Delete Value"
 
-[node name="listen_to_path" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer"]
+[node name="listen_to_path" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=359477331]
 custom_minimum_size = Vector2(120, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
 text = "Listen To Path"
 
-[node name="stop_listening" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer"]
+[node name="stop_listening" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=1693330522]
 custom_minimum_size = Vector2(120, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
 text = "Stop Listening"
 
-[node name="OutputPanel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+[node name="OutputPanel" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=1607863522]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
-size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 24
 scroll_following = true
 
-[node name="clear_output" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="clear_output" type="Button" parent="MarginContainer/VBoxContainer" unique_id=675025582]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
 text = "Clear Output"
 
-[node name="ManageDataPanel" type="PanelContainer" parent="."]
+[node name="ManageDataPanel" type="PanelContainer" parent="." unique_id=289605140]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -259,24 +258,24 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bky7l")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ManageDataPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ManageDataPanel" unique_id=2118414470]
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ManageDataPanel/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ManageDataPanel/VBoxContainer" unique_id=1782538888]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="key_value_pair_container" type="VBoxContainer" parent="ManageDataPanel/VBoxContainer/ScrollContainer"]
+[node name="key_value_pair_container" type="VBoxContainer" parent="ManageDataPanel/VBoxContainer/ScrollContainer" unique_id=347261149]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="sample_pair" type="HBoxContainer" parent="ManageDataPanel/VBoxContainer/ScrollContainer/key_value_pair_container"]
+[node name="sample_pair" type="HBoxContainer" parent="ManageDataPanel/VBoxContainer/ScrollContainer/key_value_pair_container" unique_id=1183993737]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="key" type="LineEdit" parent="ManageDataPanel/VBoxContainer/ScrollContainer/key_value_pair_container/sample_pair"]
+[node name="key" type="LineEdit" parent="ManageDataPanel/VBoxContainer/ScrollContainer/key_value_pair_container/sample_pair" unique_id=984125522]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -284,7 +283,7 @@ theme_override_font_sizes/font_size = 32
 placeholder_text = "key"
 alignment = 1
 
-[node name="value" type="LineEdit" parent="ManageDataPanel/VBoxContainer/ScrollContainer/key_value_pair_container/sample_pair"]
+[node name="value" type="LineEdit" parent="ManageDataPanel/VBoxContainer/ScrollContainer/key_value_pair_container/sample_pair" unique_id=1345338338]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -292,36 +291,36 @@ theme_override_font_sizes/font_size = 32
 placeholder_text = "values"
 alignment = 1
 
-[node name="CheckBox" type="CheckButton" parent="ManageDataPanel/VBoxContainer/ScrollContainer/key_value_pair_container/sample_pair"]
+[node name="CheckBox" type="CheckButton" parent="ManageDataPanel/VBoxContainer/ScrollContainer/key_value_pair_container/sample_pair" unique_id=1323611838]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Numeric"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ManageDataPanel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ManageDataPanel/VBoxContainer" unique_id=77088865]
 layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="close" type="Button" parent="ManageDataPanel/VBoxContainer/HBoxContainer"]
+[node name="close" type="Button" parent="ManageDataPanel/VBoxContainer/HBoxContainer" unique_id=1425540624]
 custom_minimum_size = Vector2(120, 70)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_06hu1")
-theme_override_styles/hover = SubResource("StyleBoxFlat_q5sw8")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_bmyp4")
 theme_override_styles/normal = SubResource("StyleBoxFlat_q5sw8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_bmyp4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_q5sw8")
+theme_override_styles/focus = SubResource("StyleBoxFlat_06hu1")
 text = "Close"
 
-[node name="add_pair" type="Button" parent="ManageDataPanel/VBoxContainer/HBoxContainer"]
+[node name="add_pair" type="Button" parent="ManageDataPanel/VBoxContainer/HBoxContainer" unique_id=321752229]
 custom_minimum_size = Vector2(120, 70)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_06hu1")
-theme_override_styles/hover = SubResource("StyleBoxFlat_q5sw8")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_bmyp4")
 theme_override_styles/normal = SubResource("StyleBoxFlat_q5sw8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_bmyp4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_q5sw8")
+theme_override_styles/focus = SubResource("StyleBoxFlat_06hu1")
 text = "New Pair"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer/manage_data" to="." method="_on_manage_data_pressed"]
