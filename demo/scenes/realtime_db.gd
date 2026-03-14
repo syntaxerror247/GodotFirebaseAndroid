@@ -1,6 +1,7 @@
 extends Control
 
-@onready var path = $MarginContainer/VBoxContainer/HBoxContainer/path
+@onready var output_panel = $MarginContainer/VBoxContainer/OutputPanel
+@onready var path = $MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer/HBoxContainer/path
 @onready var pair_container = $ManageDataPanel/VBoxContainer/ScrollContainer/key_value_pair_container
 
 func _notification(what: int) -> void:
@@ -15,6 +16,12 @@ func _ready() -> void:
 	Firebase.realtimeDB.delete_task_completed.connect(print_output.bind("delete_task_completed"))
 	Firebase.realtimeDB.db_value_changed.connect(print_listner_output.bind("db_value_changed"))
 
+
+func _log(message: String) -> void:
+	var time = Time.get_time_string_from_system()
+	output_panel.text += "[%s] %s\n" % [time, message]
+
+
 func get_dictionary_from_inputs() -> Dictionary:
 	var data_dict := Dictionary()
 	for pair in pair_container.get_children():
@@ -27,11 +34,17 @@ func get_dictionary_from_inputs() -> Dictionary:
 		data_dict[key] = value
 	return data_dict
 
+
 func print_output(arg, context: String):
-	$MarginContainer/VBoxContainer/OutputPanel.text += context + ": " +str(arg) + "\n"
+	_log(context + ": " + str(arg))
+
 
 func print_listner_output(arg, arg2, context: String):
-	$MarginContainer/VBoxContainer/OutputPanel.text += context + ": " +str(arg) + " -|- " +str(arg2) + "\n"
+	_log(context + ": " + str(arg) + " -|- " + str(arg2))
+
+
+func _on_clear_output_pressed() -> void:
+	output_panel.text = ""
 
 
 func _on_set_value_pressed() -> void:
@@ -56,7 +69,6 @@ func _on_listen_to_path_pressed() -> void:
 
 func _on_stop_listening_pressed() -> void:
 	Firebase.realtimeDB.stop_listening(path.text)
-
 
 
 func _on_manage_data_pressed() -> void:

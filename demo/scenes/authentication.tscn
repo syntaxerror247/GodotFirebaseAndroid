@@ -1,18 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4wla4tiq5v36"]
+[gd_scene format=3 uid="uid://b4wla4tiq5v36"]
 
 [ext_resource type="Script" uid="uid://cbqguua1lmw1q" path="res://scenes/authentication.gd" id="1_3b5bi"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dm0k"]
-draw_center = false
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.14902, 0.117647, 0.854902, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
+[ext_resource type="Script" uid="uid://c1lwfy11opayr" path="res://scenes/scroll_container.gd" id="2_scroll"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ig7tw"]
 bg_color = Color(0.180392, 0.596078, 0.572549, 0.666667)
@@ -28,7 +17,19 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[node name="Authentication" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dm0k"]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.14902, 0.117647, 0.854902, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Authentication" type="Control" unique_id=1516008471]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,7 +38,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3b5bi")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1301935428]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,7 +47,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.133333, 0.133333, 0.133333, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1095550827]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -58,146 +59,168 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1580796319]
 layout_mode = 2
-theme_override_constants/separation = 36
-alignment = 1
+theme_override_constants/separation = 10
 
-[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" unique_id=45920927]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+script = ExtResource("2_scroll")
+
+[node name="ButtonContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer" unique_id=1862006050]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=1237815704]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 placeholder_text = "Email"
 
-[node name="LineEdit2" type="LineEdit" parent="MarginContainer/VBoxContainer"]
+[node name="LineEdit2" type="LineEdit" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=1798937198]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 placeholder_text = "Password"
 
-[node name="anonymous_sign_in" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="anonymous_sign_in" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=176216697]
 custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
 text = "Sign In Anonymously"
 
-[node name="email_sign_up" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="email_sign_up" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=935803591]
 custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
 text = "Create User With Email Password"
 
-[node name="email_sign_in" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="email_sign_in" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=1559812975]
 custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
 text = "Sign In With Email Password"
 
-[node name="email_verification" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="email_verification" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=1671620727]
 custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
 text = "Send Email Verification"
 
-[node name="password_reset" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="password_reset" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=1302125307]
 custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
 text = "Send Password Reset Email"
 
-[node name="google_sign_in" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="google_sign_in" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=1871919082]
 custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
 text = "Sign In With Google"
 
-[node name="link_anonymous_with_google" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="link_anonymous_with_google" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=481102813]
 custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
 text = "Link Anonymous To Google"
 
-[node name="get_user_data" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="get_user_data" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=2078776940]
 custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
 text = "Get Current User Data"
 
-[node name="is_signed_in" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="is_signed_in" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=1880020358]
 custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
 text = "Is Signed In"
 
-[node name="sign_out" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="sign_out" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=165805541]
 custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
 text = "Sign Out"
 
-[node name="delete_user" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="delete_user" type="Button" parent="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer" unique_id=215148053]
 custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
 text = "Delete Current User"
 
-[node name="OutputPanel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+[node name="OutputPanel" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=976434836]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/normal_font_size = 24
+scroll_following = true
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/anonymous_sign_in" to="." method="_on_anonymous_sign_in_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/email_sign_up" to="." method="_on_email_sign_up_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/email_sign_in" to="." method="_on_email_sign_in_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/email_verification" to="." method="_on_email_verification_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/password_reset" to="." method="_on_password_reset_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/google_sign_in" to="." method="_on_google_sign_in_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/link_anonymous_with_google" to="." method="_on_link_anonymous_with_google_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/get_user_data" to="." method="_on_get_user_data_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/is_signed_in" to="." method="_on_is_signed_in_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/sign_out" to="." method="_on_sign_out_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/delete_user" to="." method="_on_delete_user_pressed"]
+[node name="clear_output" type="Button" parent="MarginContainer/VBoxContainer" unique_id=869574200]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0xm2m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ig7tw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_7dm0k")
+text = "Clear Output"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer/anonymous_sign_in" to="." method="_on_anonymous_sign_in_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer/email_sign_up" to="." method="_on_email_sign_up_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer/email_sign_in" to="." method="_on_email_sign_in_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer/email_verification" to="." method="_on_email_verification_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer/password_reset" to="." method="_on_password_reset_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer/google_sign_in" to="." method="_on_google_sign_in_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer/link_anonymous_with_google" to="." method="_on_link_anonymous_with_google_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer/get_user_data" to="." method="_on_get_user_data_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer/is_signed_in" to="." method="_on_is_signed_in_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer/sign_out" to="." method="_on_sign_out_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer/delete_user" to="." method="_on_delete_user_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/clear_output" to="." method="_on_clear_output_pressed"]

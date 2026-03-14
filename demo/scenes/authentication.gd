@@ -2,8 +2,8 @@ extends Control
 
 @onready var output_panel = $MarginContainer/VBoxContainer/OutputPanel
 
-@onready var email = $MarginContainer/VBoxContainer/LineEdit
-@onready var password = $MarginContainer/VBoxContainer/LineEdit2
+@onready var email = $MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer/LineEdit
+@onready var password = $MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer/LineEdit2
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
@@ -20,8 +20,18 @@ func _ready() -> void:
 	Firebase.auth.password_reset_sent.connect(print_output.bind("password_reset_sent"))
 	Firebase.auth.user_deleted.connect(print_output.bind("user_deleted"))
 
+
+func _log(message: String) -> void:
+	var time = Time.get_time_string_from_system()
+	output_panel.text += "[%s] %s\n" % [time, message]
+
+
 func print_output(arg, context: String):
-	output_panel.text += context + ": " +str(arg) + "\n"
+	_log(context + ": " + str(arg))
+
+
+func _on_clear_output_pressed() -> void:
+	output_panel.text = ""
 
 
 func _on_anonymous_sign_in_pressed() -> void:
@@ -49,7 +59,7 @@ func _on_get_user_data_pressed() -> void:
 
 
 func _on_is_signed_in_pressed() -> void:
-	print_output(Firebase.auth.is_signed_in(),"Is SignedIn")
+	print_output(Firebase.auth.is_signed_in(), "Is SignedIn")
 
 
 func _on_sign_out_pressed() -> void:

@@ -1,7 +1,8 @@
 extends Control
 
-@onready var collection = $MarginContainer/VBoxContainer/HBoxContainer/collection
-@onready var docID = $MarginContainer/VBoxContainer/HBoxContainer/docID
+@onready var output_panel = $MarginContainer/VBoxContainer/OutputPanel
+@onready var collection = $MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer/HBoxContainer/collection
+@onready var docID = $MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer/HBoxContainer/docID
 @onready var pair_container = $ManageDataPanel/VBoxContainer/ScrollContainer/key_value_pair_container
 
 func _notification(what: int) -> void:
@@ -17,6 +18,11 @@ func _ready() -> void:
 	Firebase.firestore.document_changed.connect(print_listner_output.bind("document_changed"))
 
 
+func _log(message: String) -> void:
+	var time = Time.get_time_string_from_system()
+	output_panel.text += "[%s] %s\n" % [time, message]
+
+
 func get_dictionary_from_inputs() -> Dictionary:
 	var data_dict := Dictionary()
 	for pair in pair_container.get_children():
@@ -29,11 +35,17 @@ func get_dictionary_from_inputs() -> Dictionary:
 		data_dict[key] = value
 	return data_dict
 
+
 func print_output(arg, context: String):
-	$MarginContainer/VBoxContainer/OutputPanel.text += context + ": " +str(arg) + "\n"
+	_log(context + ": " + str(arg))
+
 
 func print_listner_output(arg, arg2, context: String):
-	$MarginContainer/VBoxContainer/OutputPanel.text += context + ": " +str(arg) + " -|- " +str(arg2) + "\n"
+	_log(context + ": " + str(arg) + " -|- " + str(arg2))
+
+
+func _on_clear_output_pressed() -> void:
+	output_panel.text = ""
 
 
 func _on_add_document_pressed() -> void:
@@ -41,7 +53,7 @@ func _on_add_document_pressed() -> void:
 
 
 func _on_set_document_pressed() -> void:
-	Firebase.firestore.set_document(collection.text, docID.text, get_dictionary_from_inputs(), $MarginContainer/VBoxContainer/HBoxContainer2/merge.button_pressed)
+	Firebase.firestore.set_document(collection.text, docID.text, get_dictionary_from_inputs(), $MarginContainer/VBoxContainer/ScrollContainer/ButtonContainer/HBoxContainer2/merge.button_pressed)
 
 
 func _on_get_document_pressed() -> void:
@@ -61,12 +73,11 @@ func _on_delete_document_pressed() -> void:
 
 
 func _on_listen_to_document_pressed() -> void:
-	Firebase.firestore.listen_to_document(collection.text+"/"+docID.text)
+	Firebase.firestore.listen_to_document(collection.text + "/" + docID.text)
 
 
 func _on_stop_listening_to_document_pressed() -> void:
-	Firebase.firestore.stop_listening_to_document(collection.text+"/"+docID.text)
-
+	Firebase.firestore.stop_listening_to_document(collection.text + "/" + docID.text)
 
 
 func _on_manage_data_pressed() -> void:
@@ -77,7 +88,6 @@ func _on_add_pair_pressed() -> void:
 	var new_pair = $ManageDataPanel/VBoxContainer/ScrollContainer/key_value_pair_container/sample_pair.duplicate()
 	new_pair.show()
 	pair_container.add_child(new_pair)
-	pass
 
 
 func _on_close_pressed() -> void:
