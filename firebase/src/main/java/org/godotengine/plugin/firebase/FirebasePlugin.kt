@@ -16,9 +16,13 @@ class FirebasePlugin(godot: Godot) : GodotPlugin(godot) {
 	private val firestore = Firestore(this)
 	private val storage = CloudStorage(this)
 	private val realtimeDatabase = RealtimeDatabase(this)
+	private val analytics = Analytics(this)
 
 	override fun onMainCreate(activity: Activity?): View? {
-		activity?.let { auth.init(it) }
+		activity?.let {
+			auth.init(it)
+			analytics.init(it)
+		}
 		return super.onMainCreate(activity)
 	}
 
@@ -32,6 +36,7 @@ class FirebasePlugin(godot: Godot) : GodotPlugin(godot) {
 		signals.addAll(firestore.firestoreSignals())
 		signals.addAll(realtimeDatabase.realtimeDbSignals())
 		signals.addAll(storage.storageSignals())
+		signals.addAll(analytics.analyticsSignals())
 		return signals
 	}
 
@@ -150,4 +155,23 @@ class FirebasePlugin(godot: Godot) : GodotPlugin(godot) {
 
 	@UsedByGodot
 	fun rtdbStopListening(path: String) = realtimeDatabase.stopListening(path)
+
+	/**
+	 * Analytics
+	 */
+
+	@UsedByGodot
+	fun analyticsLogEvent(name: String, parameters: Dictionary) = analytics.logEvent(name, parameters)
+
+	@UsedByGodot
+	fun analyticsSetUserProperty(name: String, value: String) = analytics.setUserProperty(name, value)
+
+	@UsedByGodot
+	fun analyticsSetUserId(id: String) = analytics.setUserId(id)
+
+	@UsedByGodot
+	fun analyticsSetAnalyticsCollectionEnabled(enabled: Boolean) = analytics.setAnalyticsCollectionEnabled(enabled)
+
+	@UsedByGodot
+	fun analyticsResetAnalyticsData() = analytics.resetAnalyticsData()
 }
